@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <!-- xmlns:shiro="http://www.w3.org/1999/html" -->
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div shiro:user>
+        <h1>Index Page</h1>
+    </div>
+
+    <a href=""></a>
+    <hr>
+
+
+
+    <a href="/logout" th:href="@{/logout}">退出</a>
+    <hr>
+
+   <!-- <h2>hhh   <shiro:principal></shiro:principal></h2>
+Welcome:<shiro:principal property="name"/>-->
+    <h2 shiro:principal></h2>
+
+<!-- 当满足条件时候显示 -->
+    <!--<shiro:hasRole name="admin">  </shiro:hasRole>-->
+    <hr>
+    <a shiro:hasRole="admin" href="/admin" th:href="@{/admin}">admin</a>
+    <!--<a  href="/admin" th:href="">admin</a>-->
+
+
+    <!--<shiro:hasRole name="user"></shiro:hasRole>-->
+    <hr>
+    <a shiro:hasRole="user" href="/user" th:href="@{/user}">user</a>
+
+    <hr>
+    <a href="/all" th:href="@{/all}">查询全部</a>
+
+    <hr>
+
+    <a href="/view1" th:href="@{/view1}">查询id为1的用户</a>
+
+    <hr>
+    <p shiro:hasAnyRoles="admin,user">拥有一个角色就行</p>
+
+    <hr>
+    <p shiro:lacksRole="admin">没有admin角色的才可以显示</p>
+
+    <hr>
+    <p shiro:hasPermission="admin:create">拥有指定权限的显示</p>
+
+
+    <hr>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>用户名</th>
+            <th>密码</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user:${list}">
+            <td th:text="${user.user_id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.password}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

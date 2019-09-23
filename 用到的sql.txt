@@ -1,0 +1,41 @@
+-- 密码都是 123456
+-- 登录用的两个用户zhangsan 和 zs
+
+CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) DEFAULT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+insert  into `user`(`user_id`,`name`,`password`) values (1,'zhangsan','2a0d136ceacafe198ea64ac09daaf1b6'),(2,'lisi','a3caed36f0fe5a01e5f144db8927235e'),(3,'wangwu','a3caed36f0fe5a01e5f144db8927235e'),(4,'zs','fa57cba878295a0f1399b65bf766e9c1'),(5,'user','666');
+
+CREATE TABLE `user_role` (
+  `role_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert  into `user_role`(`role_id`,`user_id`) values (1,1),(2,1),(3,2),(2,2),(3,3),(4,1),(5,1),(5,4);
+
+CREATE TABLE `role` (
+  `role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+insert  into `role`(`role_id`,`role_name`) values (1,'ROLE_VIP1'),(2,'ROLE_VIP2'),(3,'ROLE_VIP3'),(4,'admin'),(5,'user');
+
+CREATE TABLE `role_permission` (
+  `role_id` int(11) DEFAULT NULL,
+  `permission_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert  into `role_permission`(`role_id`,`permission_id`) values (4,1),(5,2);
+
+CREATE TABLE `permission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `permission_name` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+insert  into `permission`(`id`,`permission_name`) values (1,'admin:*:*'),(2,'user:view:1');
